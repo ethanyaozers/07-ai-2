@@ -13,15 +13,25 @@ suppressPackageStartupMessages(library(tidyverse))
 ```{r}
 #| label: storms-plot
 storms |>
-  distinct(year, name) |>
-  count(year, name="num_storms") |>
-  ggplot(aes(x = year, y = num_storms)) +
-  geom_line() +
-  geom_point() +
-  labs(
-    title = "Number of Named Storms per Year",
-    x = "Year",
-    y = "Number of Named Storms"
+  filter(status %in% c("Tropical Depression", "Tropical Storm", "Hurricane")) |>
+  distinct(year, name, status) |>
+  count(year, status) |>
+  ggplot(aes(x = year, y = n, fill = status)) +
+  geom_area(position = "stack", alpha = 0.8) +
+  scale_fill_manual(
+    values = c(
+      "Tropical Depression" = "#ADD8E6",
+      "Tropical Storm" = "#FF8C00",
+      "Hurricane" = "#8B0000"
+    ),
+    name = "Storm Type"
   ) +
-  theme_minimal()
+  labs(
+    title = "Count of Storm Types per Year",
+    x = "Year",
+    y = "Count",
+    fill = "Storm Type"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
 ```

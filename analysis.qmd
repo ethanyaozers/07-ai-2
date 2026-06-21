@@ -1,0 +1,27 @@
+---
+title: "Exploring Storms"
+author: "ethanyaozers"
+execute:
+  echo: false
+---
+
+```{r}
+#| label: setup
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+```{r}
+#| label: storms-plot
+storms |>
+  distinct(year, name) |>
+  count(year, name="num_storms") |>
+  ggplot(aes(x = year, y = num_storms)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Number of Named Storms per Year",
+    x = "Year",
+    y = "Number of Named Storms"
+  ) +
+  theme_minimal()
+```

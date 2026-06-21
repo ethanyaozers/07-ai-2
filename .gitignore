@@ -1,0 +1,18 @@
+# Quarto
+_quarto
+.quarto
+_site
+.quarto_cache
+
+# R
+.Rhistory
+.Rdata
+.Rprofile
+.RData
+*.Rproj.user/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+.vscode
